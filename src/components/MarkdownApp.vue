@@ -6,7 +6,6 @@ import Toolbar from './Toolbar.vue'
 import Header from './Header.vue'
 
 const markdown = ref<string>('')
-const editorRef = ref<HTMLTextAreaElement | null>(null)
 
 onMounted(() => {
   const saved = localStorage.getItem('savedMarkdown')
@@ -20,15 +19,9 @@ onMounted(() => {
   <div>
     <Header />
     <div class="flex gap-5 lg:flex-col p-5">
-      <Toolbar 
-        v-model:markdown="markdown" 
-        :editor-ref="editorRef" 
-      />
+      <Toolbar v-model:markdown="markdown" />
       <main class="flex justify-between flex-col w-full lg:flex-row lg:h-[900px]">
-        <Editor 
-          v-model:markdown="markdown" 
-          :editor-ref="editorRef" 
-        />
+        <Editor v-model:markdown="markdown" />
         <Preview :markdown="markdown" />
       </main>
     </div>

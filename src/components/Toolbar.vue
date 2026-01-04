@@ -9,7 +9,6 @@ import type { Toastprops } from '../types-and-interfaces'
 
 interface Props {
   markdown: string
-  editorRef: Ref<HTMLTextAreaElement | null>
 }
 
 const props = defineProps<Props>()
