@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue'
+import { ref } from 'vue'
 import { 
   Copy, Scissors, Clipboard, Save, 
   Delete, Trash, Upload, Download 
@@ -56,7 +56,6 @@ const funcCut = async () => {
     await navigator.clipboard.writeText(props.markdown)
     emit('update:markdown', '')
     showToast('Cut to clipboard!', 'success')
-    props.editorRef.value?.focus()
   } catch (error) {
     showToast('Failed to cut', 'error')
     console.error('Cut failed:', error)
@@ -101,7 +100,6 @@ const funcClear = () => {
   if (confirm('Clear all content?')) {
     emit('update:markdown', '')
     showToast('Content cleared!', 'success')
-    props.editorRef.value?.focus()
   }
 }
 
@@ -117,7 +115,6 @@ const funcDelete = () => {
       localStorage.removeItem('savedMarkdown')
       emit('update:markdown', '')
       showToast('Deleted successfully!', 'success')
-      props.editorRef.value?.focus()
     } catch (error) {
       showToast('Failed to delete', 'error')
       console.error('Delete failed:', error)
@@ -146,7 +143,6 @@ const handleFileChange = (event: Event) => {
     const content = e.target?.result as string
     emit('update:markdown', content)
     showToast('File loaded successfully!', 'success')
-    props.editorRef.value?.focus()
   }
 
   reader.onerror = () => {
